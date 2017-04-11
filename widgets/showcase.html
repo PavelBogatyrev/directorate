@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+    <link rel="stylesheet" href="styles/showcase.css"/>
+</head>
+<body>
+    <div id="topBar">
+        <span class="widget" onclick="addWidget('waterfall')"><img src="images/waterfall_widget.png" title="Waterfall chart"/></span>
+        <span class="widget" onclick="addWidget('piechart')"><img src="images/piechart_widget.png" title="PieChart"/></span>
+        <span class="widget" onclick="addWidget('barchart')"><img src="images/barchart_widget.png" title="BarChart"/></span>
+        <span class="widget" onclick="addWidget('combine')"><img src="images/combinelinechart_widget.png" title="CombineLineBarChart"/></span>
+        <span class="settings_icon"><img src="images/settings.png" title="Settings"/></span>
+    </div>
+
+    <div id="main">
+        <div id="propertiesTab">
+            <div id="currentWidgetPane"><span>Current widget:</span><div id="currentWidget"></div></div>
+            <ul class="actionsList">
+            <li id="fadeIn">Fade In</li>
+            <li id="fadeOut">Fade Out</li>
+            <li id="randomize">Randomize</li>
+            </ul>
+
+        </div>
+        <div id="screen"></div>
+    </div>
+
+    <script src="scripts/d3/d3.min.js"></script>
+    <script src="build/build.js"></script>
+    <script src="scripts/showcase.js"></script>
+    <script>
+        init();
+    </script>
+</body>
+</html>

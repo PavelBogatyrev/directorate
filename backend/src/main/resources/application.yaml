@@ -1,0 +1,210 @@
+spring:
+  profiles: dev
+
+horizon:
+  adminAccounts:
+    - admin
+  userAccounts:
+    - screenshot_user
+    - user
+  service.dir.active: true
+datasource_app:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost/dir
+  username: root
+  password: r00t
+  max-active: 50
+  initial-size: 5
+  max-idle: 10
+  min-idle: 5
+  test-while-idle: true
+  test-on-borrow: true
+  validation-query: SELECT 1
+  dbplatform: org.hibernate.dialect.MySQL5Dialect
+  show-sql: true
+  ddl-auto: update
+datasource_domain:
+  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  dbplatform: org.hibernate.dialect.SQLServerDialect
+  url: jdbc:sqlserver://msk-dwh-02:1433;databaseName=datamart_tableau
+  username: horizon_report
+  password: QzWxEc
+#  url: jdbc:sqlserver://172.30.19.223:1433;databaseName=directorate_int
+#  username: dir_int
+#  password: dir_int
+  max-active: 50
+  initial-size: 5
+  max-idle: 10
+  min-idle: 5
+  test-while-idle: true
+  test-on-borrow: true
+  validation-query: SELECT 1
+  show-sql: true
+  ddl-auto: none
+
+logging:
+  level:
+    com.luxoft: DEBUG
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+
+# Selenium
+selenium:
+  hub: http://localhost:9515
+  render.url: http://localhost:8080/dir-master/
+  max.threads: 5
+
+# AD
+ad:
+  url: ldap://oro-dc1.luxoft.com:3268
+  search.base: dc=luxoft,dc=com
+  group.admin: Luxoft-Horizon-BOD-Admins
+  group.users: Luxoft-Horizon-BOD-Users
+
+logging.level:
+  com.luxoft: DEBUG
+  org.springframework.web: ERROR
+  org.hibernate: ERROR
+
+---
+spring:
+  profiles: int
+horizon:
+  adminAccounts:
+    - admin
+  userAccounts:
+    - screenshot_user
+    - user
+  service.dir.active: true
+datasource_app:
+  dbplatform: org.hibernate.dialect.MySQL5Dialect
+  driverClassName: com.mysql.jdbc.Driver
+  jndi-name: java:comp/env/jdbc/dir_app
+  show-sql: true
+  ddl-auto: update
+datasource_domain:
+  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jndi-name: java:comp/env/jdbc/dir_domain
+  show-sql: true
+  ddl-auto: none
+
+logging:
+  level:
+    com.luxoft: DEBUG
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+
+# Selenium
+selenium:
+  hub: http://localhost:9515
+  render.url: http://localhost:8080/dir/
+  max.threads: 5
+
+# AD
+ad:
+  url: ldap://oro-dc1.luxoft.com:3268
+  search.base: dc=luxoft,dc=com
+  group.admin: Luxoft-Horizon-BOD-Admins
+  group.users: Luxoft-Horizon-BOD-Users
+
+logging.level:
+  com.luxoft: DEBUG
+  org.springframework.web: ERROR
+  org.hibernate: ERROR
+
+---
+spring:
+  profiles: uat
+
+horizon:
+  adminAccounts:
+    - admin
+  userAccounts:
+    - screenshot_user
+    - user
+  service.dir.active: true
+
+# Database parameters
+datasource_app:
+  driverClassName: com.mysql.jdbc.Driver
+  dbplatform: org.hibernate.dialect.MySQL5Dialect
+  jndi-name: java:comp/env/jdbc/dir_app
+  show-sql: true
+  ddl-auto: update
+datasource_domain:
+  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  dbplatform: org.hibernate.dialect.SQLServerDialect
+  jndi-name: java:comp/env/jdbc/dir_domain
+  show-sql: true
+  ddl-auto: none
+
+logging:
+  level:
+    com.luxoft: DEBUG
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+
+# Selenium
+selenium:
+  hub: http://localhost:9515
+  render.url: http://localhost:8080/dir/
+  max.threads: 5
+
+# AD
+ad:
+  url: ldap://oro-dc1.luxoft.com:3268
+  search.base: dc=luxoft,dc=com
+  group.admin: Luxoft-Horizon-BOD-Admins
+  group.users: Luxoft-Horizon-BOD-Users
+
+logging.level:
+  com.luxoft: DEBUG
+  org.springframework.web: ERROR
+  org.hibernate: ERROR
+
+---
+spring:
+  profiles: prod
+horizon:
+  adminAccounts:
+    - admin
+  userAccounts:
+    - screenshot_user
+    - user
+  service.dir.active: true
+datasource_app:
+  driverClassName: com.mysql.jdbc.Driver
+  dbplatform: org.hibernate.dialect.MySQL5Dialect
+  jndi-name: java:comp/env/jdbc/dir_app
+  show-sql: false
+  ddl-auto: none
+datasource_domain:
+  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  dbplatform: org.hibernate.dialect.SQLServerDialect
+  jndi-name: java:comp/env/jdbc/dir_domain
+  show-sql: false
+  ddl-auto: none
+
+logging:
+  level:
+    com.luxoft: ERROR
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+
+# Selenium
+selenium:
+  hub: http://localhost:9515
+  render.url: https://localhost:8443
+  max.threads: 5
+
+# AD
+ad:
+  url: ldap://oro-dc1.luxoft.com:3268
+  search.base: dc=luxoft,dc=com
+  group.admin: Luxoft-Horizon-BOD-Admins
+  group.users: Luxoft-Horizon-BOD-Users
+
+logging.level:
+  com.luxoft: DEBUG
+  org.springframework.web: ERROR
+  org.hibernate: ERROR

@@ -1,0 +1,187 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    min-height:100%;
+    background: linear-gradient(right top, #e1edf5 0%, #bbd8ea 100%);
+    background: -webkit-linear-gradient(right top, #e1edf5 0%, #bbd8ea 100%);
+
+}
+
+.showSlideAnim{
+    -webkit-animation: slideleft 2s;
+    -o-animation: slideleft 2s;
+    animation: slideleft 2s;
+}
+
+header {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    height:80px;
+    width: 100%;
+
+
+}
+
+@-webkit-keyframes slideleft {
+    from {
+
+        margin-left: -100%
+    }
+    to {
+        margin-left: 0;
+    }
+
+}
+
+@-o-keyframes slideleft {
+    from {
+
+        margin-left: -100%
+    }
+    to {
+        margin-left: 0;
+    }
+
+}
+
+@-moz-keyframes slideleft {
+    from {
+
+        margin-left: -100%
+    }
+    to {
+        margin-left: 0;
+    }
+
+}
+
+@keyframes slideleft {
+    from {
+
+        margin-left: -100%
+    }
+    to {
+        margin-left: 0;
+    }
+
+}
+#headerLine{
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    height: 4px;
+}
+#emptyLine{
+    flex-grow: 0;
+    width: 60px;
+}
+#rightLine{
+    flex-grow: 1;
+    background: #689EC0;
+}
+#leftLine{
+    flex-grow: 0;
+    width:35px;
+    background: #689EC0;
+}
+
+header img{
+    z-index: 2;
+    width: 200px;
+    margin-bottom: -30px;
+    height:100px;
+    margin-left: 10px;
+}
+#screenTitle{
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: -30px;
+    font-family: Arial, serif;
+    margin-left:30px;
+}
+main{
+    position: absolute;
+    top:84px;
+    bottom: 0;
+    width:100%;
+}
+
+.cell{
+    margin-bottom: 2%;
+    margin-right:5%;
+    width:45%;
+    height:45%;
+    float:left;
+}
+
+
+
+
+/*.row{
+    flex-grow: 1;
+    display:flex;
+    flex-direction: row;
+}
+.column{
+
+    flex-grow: 1;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}*/
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+
+}
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+
+}
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+
+}
+
+.separator {
+    height:2px;
+    background: #7f8894;
+}

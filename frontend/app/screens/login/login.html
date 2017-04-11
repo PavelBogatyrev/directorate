@@ -1,0 +1,10 @@
+<div class="login" ng-controller="LoginController">
+    <form action="" name="form" novalidate>
+        <fieldset>
+            <input class="user" type="text" name="" id="" ng-model="userName" placeholder="USERNAME" required autofocus>
+            <input class="pass" type="password" name="" id="" ng-model="password" placeholder="PASSWORD">
+            <input type="button" ng-click="login(userName, password)" value="SIGN IN" ng-disabled="form.$invalid">
+            <span class="errormessage">Username and/or password are incorrect.<br>Please try again.</span>
+        </fieldset>
+    </form>
+</div>

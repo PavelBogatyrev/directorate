@@ -1,0 +1,66 @@
+<!DOCTYPE html style="height: 100%; width: 100%;">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="build/build.js"></script>
+    <script src="scripts/d3/d3.min.js"></script>
+
+    <script>
+        var piechartWidget;
+        var renderMode;
+
+        function onResize(){
+            if (piechartWidget) {
+                setupWidget();
+                piechartWidget[renderMode]();
+            }
+        }
+
+        function setupWidget() {
+            document.querySelector("#trg").innerHTML = "";
+            piechartWidget = App.PieChart.create("#trg");
+            piechartWidget.getConfig().innerLabels.show = true;
+            piechartWidget.setData({
+                data:[{values:[10,20,15,30,40,6]}]
+            });
+
+        }
+
+        function fadeIn() {
+            renderMode = "fadeIn";
+            setupWidget();
+            piechartWidget.fadeIn();
+
+        }
+        function fadeOut() {
+            piechartWidget.fadeOut();
+            piechartWidget = null;
+
+        }
+
+        function render() {
+            renderMode = "render";
+            setupWidget();
+            piechartWidget.render();
+
+        }
+
+
+    </script>
+</head>
+<body style="margin:0; height: 100%; width: 100%;" onresize="onResize();">
+
+<div style="display: inline-block; height:5%;">
+    <button onclick="fadeIn();">fadeIn</button>
+    <button onclick="fadeOut();">fadeOut</button>
+    <button onclick="render();">render</button>
+    <button disabled onclick="addData();">addData</button>
+    <button disabled onclick="removeData();">removeData</button>
+    <button disabled onclick="noData();">noData</button>
+    <button disabled onclick="randomize();">randomize</button>
+</div>
+<div id="trg" style="margin:0; width: 100%; height: 95%;"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+<project name="CopyBuild"  basedir=".">
+    <target name="copy">
+        <copy file="build/build.js" todir="../frontend/app/js"/>
+    </target>
+</project>

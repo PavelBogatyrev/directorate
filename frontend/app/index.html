@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bodApp" ng-controller="RootController">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Directorate</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+<body keypress-events>
+<div id="header" ng-controller="actionsController">
+    <strong class="logo"><a href="/">Luxoft</a> <span>Powered by Horizon Light</span></strong>
+
+    <div class="menu-holder">
+        <span class="menu" ng-click="menus($event)">menu</span>
+
+        <div class="menu-drop">
+            <ul class="settings-list" ng-controller="settingsController">
+                <li ng-repeat="item in settingsList track by $index" ng-repeat-end-watch="RenderComplete" class="{{item.hidden}}">
+                    <a href="#/view_{{item.link}}" ng-click="changeView()">
+                        <span class="image"><img ng-src="images/screenshots/{{item.image}}.png" alt=""></span>
+                        <span class="text">{{item.text}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <ul class="actions">
+        <li><a href="" class="settings" ng-click="menus($event)">Settings</a>
+        </li>`
+        <li>
+            <a href="" class="pdf" ng-click="print($event)">Print PDF</a>
+            <div class="overlay">
+                <div class="popup">
+                    <div class="content">
+                        <p>PDF Generation Progress: {{percents}}%</p>
+                        <span class="loader"><span class="bar" style="width:{{percents}}%"></span></span>
+                    </div>
+                    <div class="buttons">
+                        <button ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li ng-show="adminMode()">
+            <a href="" class="xls" ng-click="popupShow($event)">Upload Excel</a>
+
+            <div class="overlay">
+                <div class="popup">
+                    <div class="content">
+                        <p ng-hide="isUpload">Select a file to upload:</p>
+
+                        <p ng-show="isUpload">Uploading file</p>
+
+                        <p ng-hide="isUpload">{{status}}</p>
+                        <progress ng-show="isUpload"></progress>
+                        <input ng-hide="isUpload" type="file" file-model="file" id="">
+                    </div>
+                    <div class="buttons">
+                        <button ng-hide="isUpload" ng-click="uploadFile()">Upload</button>
+                        <button data-ng-disabled="isUpload" ng-click="popupShow($event)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li ng-controller="LoginController"><a href="" ng-click="logout()" class="exit">Exit</a></li>
+    </ul>
+</div>
+
+<div class="container" ng-controller="indexController" ng-class="slideClass">
+    <div class="content" back-animation>
+        <div ng-swipe-left="nextPage()" ng-swipe-right="prevPage()" ng-view ng-class="[effect, pageClass]"
+             class="page"></div>
+    </div>
+    <div class="bx-wrapper">
+        <div class="bx-controls-direction">
+            <a href="" ng-click="prevPage()" ng-show="firstScreen()" class="bx-prev">Prev</a>
+            <a href="" ng-click="nextPage()" ng-show="lastScreen()" class="bx-next">Next</a>
+        </div>
+    </div>
+    <div class="pagenumber">{{page_Number}}</div>
+</div>
+<div id="settings" ng-controller="settingsController">
+    <div class="title-bar">
+        <div class="options">
+            <div class="drop-holder" ng-show="adminMode()">
+                <span>{{currentPeriod | periodFormatConverter}}</span>
+                <ul class="drop">
+                    <li ng-class="{'active': period == currentPeriod}" ng-repeat="period in periods" data-attr="{{period}}" ng-click="currentUpdate(period)">{{period | periodFormatConverter}}</li>
+                </ul>
+            </div>
+            <div class="bgcolor">
+                <span data-attr="blue" class="blue" ng-click="bg='blue'" ng-class="{'active': bg == 'blue'}">App BG</span>
+                <span data-attr="white" class="white" ng-click="bg='white'" ng-class="{'active': bg == 'white'}">App BG</span>
+            </div>
+            <button class="btn" ng-click="regenerate()" ng-disabled="disabled" ng-show="adminMode()" >ReGenerate<br>Screenshots</button>
+            <button class="btn" ng-click="regenerateAll()" ng-disabled="disabled" ng-show="adminMode()" >ReGenerate All<br>Screenshots</button>
+        </div>
+        <h1>Settings</h1>
+    </div>
+    <ul class="settings-list">
+        <li ng-click="toggleClass($event)" id="{{item.link}}_0" ng-repeat="item in settingsList track by $index" data-attr="{{item.link}}"  ng-repeat-end-watch="RenderComplete" class="{{item.hidden}}">
+            <div class="image">
+                <img ng-src="images/screenshots/{{item.image}}.png" alt="">
+            </div>
+            <div class="text">{{item.text}}</div>
+        </li>
+    </ul>
+    <div class="buttons">
+        <a href ng-click="collectInfo($event)">Close</a>
+    </div>
+</div>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-touch/angular-touch.min.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/d3/d3.min.js"></script>
+
+<script src="app.js"></script>
+<script src="js/controllers.js"></script>
+
+<!-- Controllers -->
+<script src="js/controllers/LoginController.js"></script>
+<script src="js/controllers/RootController.js"></script>
+
+<!-- Services -->
+<script src="js/services/LabelService.js"></script>
+<script src="js/services/ConfigurationService.js"></script>
+<script src="js/services/FileUploadService.js"></script>
+<script src="js/services/LoginService.js"></script>
+
+<!--Directives-->
+<script src="js/directives/backAnimation.js"></script>
+<script src="js/directives/fileModel.js"></script>
+<script src="js/directives/globalKeypress.js"></script>
+<script src="js/directives/ngRepeatWatcher.js"></script>
+
+<!--Filters-->
+<script src="js/filters/filter_html.js"></script>
+<script src="js/filters/filter_period.js"></script>
+
+<!--Libs-->
+<script src="js/lib/jquery-ui-sortable.min.js"></script>
+
+<!--Views-->
+<script src="screens/view_main/view_main.js"></script>
+<script src="screens/view_kpi_month/view_kpi_month.js"></script>
+<script src="screens/view_kpi_year/view_kpi_year.js"></script>
+<script src="screens/view_revenue_lobs_forecast_forex/view_revenue_lobs_forecast_forex.js"></script>
+<script src="screens/view_highlights/view_highlights.js"></script>
+<script src="screens/view_revenue_lobs_pl/view_revenue_lobs_pl.js"></script>
+<script src="screens/view_revenue_clients_pl/view_revenue_clients_pl.js"></script>
+<script src="screens/view_revenue_2year_lobs/view_revenue_2year_lobs.js"></script>
+<script src="screens/view_revenue_2year_clients/view_revenue_2year_clients.js"></script>
+<script src="screens/view_lobs_finx/view_lobs_finx.js"></script>
+<script src="screens/view_lobs_fins_s_2/view_lobs_fins_s_2.js"></script>
+<script src="screens/view_lobs_auto/view_lobs_auto.js"></script>
+<script src="screens/view_lobs_enterprise/view_lobs_enterprise.js"></script>
+<script src="screens/view_lobs_telecom/view_lobs_telecom.js"></script>
+<script src="screens/view_lobs_excelian/view_lobs_excelian.js"></script>
+<script src="screens/view_lobs_horizon/view_lobs_horizon.js"></script>
+<script src="screens/view_lobs_global/view_lobs_global.js"></script>
+<script src="screens/view_lobs_global_4practices/view_lobs_global_4practices.js"></script>
+<script src="screens/view_revenue_lobs_vsplan_forex/view_revenue_lobs_vsplan_forex.js"></script>
+<script src="screens/view_firstpair_practices/view_firstpair_practices.js"></script>
+<script src="screens/view_secondpair_practices/view_secondpair_practices.js"></script>
+<script src="screens/view_thirdpair_practices/view_thirdpair_practices.js"></script>
+<script src="screens/login/login.js"></script>
+
+<script src="components/version/version.js"></script>
+<script src="components/version/version-directive.js"></script>
+<script src="components/version/interpolate-filter.js"></script>
+
+<script src="js/build.js"></script>
+</body>
+</html>

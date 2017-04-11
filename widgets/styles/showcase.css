@@ -1,0 +1,131 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    background: #434343 linear-gradient(#434343, #282828);
+}
+html *{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+}
+#topBar {
+    background: linear-gradient(to bottom, #196a9d, #1491ff, #196a9d);
+    height: 5vh;
+    margin-bottom: 1vh;
+}
+
+.widget img {
+
+    width: 4vh;
+    height: 4vh;
+    margin-top: 0.5vh;
+    background: #172b34;
+    margin-left: 1vw;
+}
+.widget img:hover{
+
+
+    background: #214752;
+
+}
+.settings_icon{
+    position: relative;
+    float:right;
+
+}
+.settings_icon img {
+
+    width: 4vh;
+    height: 4vh;
+    margin-top: 0.5vh;
+    margin-right: 1vw;
+}
+.settings_icon img:hover{
+
+    transition: all 2s ease-in-out 0s;
+    transform: rotate(360deg);
+
+}
+
+
+
+#screen {
+
+    height:95vh;
+    background-size:50px 50px;
+    background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
+}
+
+#propertiesTab {
+    position: relative;
+    margin-right: 0.5vw;
+    overflow: auto;
+    float:left;
+    width: 10vw;
+    height: 50vh;
+    background: #196a9d;
+}
+
+
+.actionsList{
+    margin-top:1vh;
+    padding-left:0;
+    list-style-type: none;
+}
+.actionsList li{
+    cursor: pointer;
+    color:white;
+    font-size: 2vmin;
+    padding-left: 0.5vw;
+    display:block;
+}
+.actionsList li:hover{
+    background: cadetblue;
+}
+
+#currentWidgetPane {
+    color: white;
+    padding-left: 0.5vw;
+    margin-bottom: 0;
+    background: #1491ff;
+    font-size: 2vmin;
+}
+
+.selectedWidget{
+    box-shadow: 0 0 50px rgba(30, 161, 255, 0.8);
+}
+.widgetContainer{
+    margin: 0.5vw;
+    display:inline-block;
+    position:relative;
+    width:800px;
+    height:500px;
+}
+
+.resizeTool {
+
+    width:16px;
+    height:16px;
+    position: absolute;
+    opacity: 0;
+    bottom: 0;
+    right:0;
+    background: url('../images/resize.png');
+
+}
+.resizeTool:hover{
+    opacity:1;
+
+    cursor: nwse-resize;
+
+}
+
